@@ -1,81 +1,160 @@
 # Stian Skogbrott
 
-**Agentic AI governance · execution assurance · policy-as-code · reliable automation**
+**Agent execution authority · policy-as-code · conformance · reliable autonomous systems**
 
-I work on a narrow problem with broad consequences:
+I work on the boundary between **AI reasoning and real-world authority**.
 
-> **How can autonomous AI agents act against real systems without letting model reasoning become execution authority?**
+> **The interesting question is not only what an agent can do. It is what the system can prove the agent was allowed to cause.**
 
-My current work focuses on action-time authorization, exact-call binding, policy enforcement, runtime evidence, controlled execution, effect verification, and falsifiable evaluation.
+My current work is centered on a simple architectural position:
+
+```text
+reasoning authority != execution authority
+```
+
+A model may propose an action. The authority to approve, bind, dispatch and verify that action should come from controls outside the model's own reasoning loop.
+
+That leads to a research program spanning three layers:
+
+```text
+                         ┌──────────────────────────────┐
+                         │  REMORA Research             │
+                         │  mechanisms + experiments   │
+                         └──────────────┬───────────────┘
+                                        │
+                                        ▼
+                         ┌──────────────────────────────┐
+                         │  Agent Authority Conformance │
+                         │  common evidence vocabulary │
+                         └──────────────┬───────────────┘
+                                        │
+                                        ▼
+                         ┌──────────────────────────────┐
+                         │  Assured Agent Execution     │
+                         │  deployable control patterns│
+                         └──────────────────────────────┘
+```
+
+The common problem is **action-time authority**: who authorized an action, what exactly was authorized, whether the protected effect can bypass the governed path, whether the authorization remained valid at dispatch, and whether the external effect can be verified afterwards.
 
 ## Current research
 
-### [REMORA](https://github.com/darklordVirtual/REMORA-research)
+### [Agent Authority Conformance](https://github.com/darklordVirtual/agent-authority-conformance)
 
-A policy-gated execution assurance layer placed between an agent proposal and the protected tool path.
+A standalone, vendor-neutral evidence model for comparing authority and execution controls in agentic systems without collapsing them into a vague security score.
 
-`proposal → policy decision → review/grant → fresh pre-execution check → exact-call binding → enforcement → dispatch → effect verification`
+It separates seven properties:
 
-REMORA deliberately separates properties that are often collapsed into one vague notion of "agent safety":
+| | Property | Question |
+|---|---|---|
+| **A** | Receipt Integrity | Is the authorization artifact authentic, intact and valid? |
+| **B** | Authority Provenance | Who or what actually had authority to approve the action? |
+| **C** | Exact-Call Integrity | Is approval bound to the exact call that is executed? |
+| **D** | Semantic Authority | Was the action authorized in its real operational meaning? |
+| **E** | Execution-Boundary Integrity | Can the protected effect bypass the governed path? |
+| **F** | TOCTOU Resistance | Can approved conditions change before execution? |
+| **G** | Effect Verification | Did the intended external effect actually occur? |
 
-- deployment integrity
-- permission and authority provenance
-- semantic correctness
-- exact-call integrity
-- execution-boundary integrity
-- TOCTOU resistance
-- observed effect
+The rules are deliberately conservative:
 
-**Status:** research/shadow-mode software. No production-certification claim. External replication remains welcome.
+```text
+PASS requires resolved evidence
+UNTESTED is not failure
+OUT OF SCOPE is not a deficiency
+properties are never aggregated into one score
+```
 
-### [Agent Authority Conformance v0.1](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/benchmarks/agent-authority-conformance-v0.1.md)
+The repository contains a normative v0.1 specification, a machine-readable assessment schema, CI validation and bounded cross-system assessments.
 
-A draft, vendor-neutral vocabulary for evaluating agent execution systems property by property rather than collapsing them into a single security score.
+I am particularly interested in whether these seven properties survive contact with systems built on assumptions very different from REMORA. If they do not, the vocabulary should change.
 
-The evidence rule is intentionally strict: `PASS` requires resolved evidence; `UNTESTED` is not failure; `OUT OF SCOPE` is not a deficiency.
+### [REMORA Research](https://github.com/darklordVirtual/REMORA-research)
 
-First application:
-[AEGIS Core 3.4.0 × REMORA crosswalk](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/benchmarks/aegis-remora-crosswalk.md).
+REMORA explores policy-gated execution assurance for operational AI agents. It sits between an agent proposal and the protected tool path.
 
-## How I work
+```text
+proposal
+   ↓
+authoritative context
+   ↓
+policy decision
+   ↓
+review / short-lived grant
+   ↓
+fresh pre-execution checks
+   ↓
+exact-call binding
+   ↓
+controlled dispatch
+   ↓
+postcondition / effect evidence
+```
 
-I am more interested in **falsifiable claims than impressive demos**.
+The project is intentionally evidence-heavy. Claims are tied to committed artifacts, explicit scope and permanent negative results rather than being inferred from architecture diagrams or demos.
 
-1. State the property being claimed.
-2. Build a test or benchmark that can disprove it.
-3. Bind results to committed evidence.
-4. Keep scope and caveats with the result.
-5. Publish negative results instead of deleting failed hypotheses.
-6. Feed useful findings back into architecture, code, and external technical discussions.
-
-A representative example is the REMORA BFCL C-ext3 ablation: structural controls accepted 24/500 wrong-tool calls, contracts + intent reduced that to 6/500, and a stricter semantic floor reduced native wrong-tool ACCEPTs to 0/500. The same run also missed important autonomy targets. Both sides remain published.
+**Useful entry points:**
 
 - [Claim register](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/assurance/claim_register_v1.yaml)
 - [Negative results](https://github.com/darklordVirtual/REMORA-research/blob/master/NEGATIVE_RESULTS.md)
+- [Evidence and claims](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/02-evidence-and-claims.md)
+- [Architecture](https://github.com/darklordVirtual/REMORA-research/blob/master/ARCHITECTURE.md)
 
-## Selected projects
+REMORA is research/shadow-mode software. It does **not** claim production certification or universal agent safety.
 
 ### [Assured Agent Execution](https://github.com/darklordVirtual/assured-agent-execution)
 
-A product-oriented execution layer built around pinned REMORA artifacts: exact-payload approval binding, separate proposer/approver/executor identities, controlled dispatch, and postcondition verification.
+Product-oriented work on turning the research into deployable control-plane patterns: exact-payload approval binding, separate proposer/approver/executor identities, controlled dispatch, auditable execution state and postcondition verification.
 
 ### [vericlaim](https://github.com/darklordVirtual/vericlaim)
 
-CI/CD for claims: mechanically binds documentation, benchmarks, published results, and reusable code to the evidence that supports them, so drift fails the build instead of silently becoming project truth.
+An experiment in treating technical claims like build artifacts: documentation, benchmark results and reusable code are mechanically bound to the evidence that supports them, so unsupported drift can fail CI instead of silently becoming project truth.
 
-## Standards and technical discussions
+## What I am trying to falsify
 
-I use external discussions as part of the research loop: expose an architectural claim, let other implementers attack it, then bring the useful disagreement back into the model.
+I prefer research questions that can embarrass the architecture.
+
+Some of the questions I am actively interested in:
+
+- **Authority provenance:** can a system prove that the principal approving an action actually held the required authority, including delegation and attenuation?
+- **Credential topology:** how do we demonstrate that a protected side effect is unreachable outside the policy enforcement path rather than merely assuming it?
+- **Exact-call integrity:** what canonical representation is sufficient to bind authorization to complex, nested and versioned tool arguments without ambiguity?
+- **Distributed TOCTOU:** how should single-use grants, revocation and approval freshness behave across processes, hosts and retries?
+- **Semantic authority:** where should authoritative task meaning come from when the model itself cannot be allowed to manufacture the authority for its own proposal?
+- **Effect verification:** what constitutes authoritative evidence that an external side effect occurred, especially when the downstream system offers weak read-back semantics?
+- **Conformance validity:** can independent assessors apply the same authority model and reach comparable conclusions without sharing implementation assumptions?
+
+These are more interesting to me than another benchmark claiming that an agent completed a task successfully.
+
+## Evidence over posture
+
+My working rule is simple:
+
+1. State the property precisely.
+2. Define what evidence would support it.
+3. Design a test that can disprove it.
+4. Bind the result to an immutable artifact or revision.
+5. Keep scope and caveats next to the result.
+6. Publish negative results and failed hypotheses.
+7. Change the architecture when the evidence says it should change.
+
+A useful result can therefore be `PASS`, `UNTESTED`, `OUT OF SCOPE`, or a falsified hypothesis. The label matters less than whether another engineer can inspect how it was obtained.
+
+## Technical discussions as research input
+
+I use external discussions to pressure-test the work, not to accumulate endorsements. The most useful response is often a precise objection that forces a property boundary or claim to become narrower.
+
+Selected examples:
 
 - **CoSAI WS4 · Agent Manifest RFC**  
-  [Semantic correctness, execution authority, and observed effect as separate properties](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5361848671)
+  [Semantic correctness, execution authority and observed effect as separate properties](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5361848671)
 
 - **CoSAI WS4 · runtime evidence / OCSF boundary**  
-  [Admission vs. closure evidence, runtime trust-base integrity, and policy separation](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5381095802)
+  [Admission vs. closure evidence, runtime trust-base integrity and policy separation](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5381095802)
 
-These discussions are useful precisely when they expose a missing property, an artificial boundary, or a claim that needs to be narrowed.
+- **AEGIS Core × Agent Authority Conformance**  
+  A cross-system dialogue around replay suppression, argument binding, scope declarations and the difference between SDK-level evidence and deployment-level guarantees. The point is not to rank implementations, but to see whether the same vocabulary describes both fairly.
 
-## Principles
+## Principles I keep returning to
 
 ```text
 reasoning authority != execution authority
@@ -83,6 +162,8 @@ reasoning authority != execution authority
 a valid receipt != proof of effect
 
 permission != semantic correctness
+
+a pre-tool hook != an enforcement boundary
 
 telemetry != authorization
 
@@ -93,20 +174,31 @@ OUT OF SCOPE != failure
 negative results are results
 ```
 
-## Current interests
+## Where expert review would be valuable
 
-- agent authority and execution assurance
-- MCP and agent-to-tool security boundaries
-- policy-as-code and PDP/PEP architectures
-- runtime evidence and trustworthy observability
-- delegation and short-lived authority
-- semantic tool-selection evaluation
-- postcondition / effect verification
-- conformance models and reproducible benchmarks
-- Python systems for reliable autonomous workflows
+I would particularly like criticism or replication from people working in:
+
+- distributed systems and concurrency
+- IAM, capability security and delegated authority
+- formal methods and protocol analysis
+- policy engines, PDP/PEP architectures and policy-as-code
+- agent runtimes, MCP and tool-execution infrastructure
+- secure systems architecture and credential isolation
+- observability, audit evidence and postcondition verification
+- safety evaluation, benchmark methodology and inter-rater agreement
+
+If you can show that an assumption is wrong, a property is underspecified, a test proves less than claimed, or an important dimension is missing, **that is a useful contribution**.
+
+Good collaboration here looks like:
+
+```text
+claim → counterexample → narrower property → reproducible test → better architecture
+```
+
+Independent assessment of **Agent Authority Conformance**, adversarial review of **REMORA**, and technically serious comparisons with other execution-control systems are especially welcome.
 
 ## Background
 
-I build software while working close to real operational infrastructure and production systems. That makes failure modes, credential custody, blast radius, rollback, auditability, and boring deterministic controls unusually interesting to me.
+I am CEO of **Luftfiber AS** and work close to production telecom and operational infrastructure. That environment keeps the research anchored in mundane but important realities: credential custody, tenant boundaries, stale state, blast radius, rollback, auditability and what happens when software touches systems that matter.
 
-If you are working on agent runtimes, governance, MCP security, execution controls, or reproducible evaluation, I am particularly interested in **technical comparison, adversarial review, and independent replication**.
+My broader interests include Python systems, network automation, MCP infrastructure, trustworthy autonomous operations and the engineering gap between an impressive agent demo and an agent that should be permitted to act.
