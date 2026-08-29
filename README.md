@@ -105,6 +105,30 @@ REMORA is research/shadow-mode software. It does **not** claim production certif
 
 Product-oriented work on turning the research into deployable control-plane patterns: exact-payload approval binding, separate proposer/approver/executor identities, controlled dispatch, auditable execution state and postcondition verification.
 
+### [pilotfish](https://github.com/darklordVirtual/pilotfish)
+
+The same question outside AI: which network link may a class of traffic use, and
+who can prove it was allowed to.
+
+Link selection today is a metric optimisation. That is the right answer only
+when nothing but latency constrains the choice, and it is the wrong one whenever
+something else does: a metered LTE plan with a cap, a contractual SLA, traffic
+that may not cross an unencrypted or foreign path, a free-space-optics hop whose
+weather evidence has gone stale. Those constraints usually end up as static
+failover lists nobody can audit.
+
+So policy governs which links are *permitted* for a traffic class, with a reason
+recorded for every exclusion, and a cheap scheduler chooses freely inside that
+set. Evidence carries a timestamp and a source, so a permitted set contracts on
+its own as measurements age, and a site that loses its authority falls to a
+signed floor policy rather than to whatever it last liked.
+
+The simulator compares it against the three selectors people actually run, and
+[NEGATIVE_RESULTS.md](https://github.com/darklordVirtual/pilotfish/blob/master/NEGATIVE_RESULTS.md)
+records where governance bought nothing: on plain failover it ties greedy
+selection, and it damps flapping no better. Where it pays, it pays by refusing
+to carry traffic, and the cost is published in the same table as the benefit.
+
 ### [vericlaim](https://github.com/darklordVirtual/vericlaim)
 
 An experiment in treating technical claims like build artifacts: documentation, benchmark results and reusable code are mechanically bound to the evidence that supports them, so unsupported drift can fail CI instead of silently becoming project truth.
