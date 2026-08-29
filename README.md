@@ -109,6 +109,39 @@ Product-oriented work on turning the research into deployable control-plane patt
 
 An experiment in treating technical claims like build artifacts: documentation, benchmark results and reusable code are mechanically bound to the evidence that supports them, so unsupported drift can fail CI instead of silently becoming project truth.
 
+## Where the work has been tested from outside
+
+The rule above is easy to write and only means something when someone else
+applies it to you. Two recent cases, stated at the level the evidence supports.
+
+**An external technical review of REMORA**, against a locked commit, produced
+eleven findings: a published component ablation whose numbers were absent from
+the artifact it cited, an execution path whose token bound less than its
+documentation claimed, a false-accept rate measured against the wrong
+denominator, and eight more. Ten are closed, each with a negative conformance
+test that fails on the original defect. The eleventh is independent replication,
+which cannot be closed from inside the repository, and it is recorded as open
+rather than argued away. The withdrawn claim and what replaced it are in
+[NEGATIVE_RESULTS.md §57](https://github.com/darklordVirtual/REMORA-research/blob/master/NEGATIVE_RESULTS.md).
+
+**A cross-implementation run against the
+[APS conformance suite](https://github.com/Agent-Authority-Conformance/aps-conformance-suite).**
+REMORA's canonical JSON was compared byte for byte against RFC 8785 vectors from
+another project. The run found a Windows harness defect in that suite and a
+coarse boundary in REMORA's own implementation, and the resulting interop record
+is [open for review there](https://github.com/Agent-Authority-Conformance/aps-conformance-suite/pull/41).
+
+The most useful part was being wrong in public. That record originally claimed
+REMORA prevents two argument sets from sharing canonical bytes. The corpus
+maintainer showed in review that distinct float literals collapse during JSON
+parsing before the check runs, so the guarantee holds for integers and nothing
+else. The claim is now narrowed in the code, the record and the design document,
+with a test pinning the limit.
+
+An author-run interop record is not certification, not endorsement, and not
+independent validation. It is one implementation's observed behaviour against
+another project's vectors, with the divergences kept rather than smoothed.
+
 ## What I am trying to falsify
 
 I prefer research questions that can embarrass the architecture.
