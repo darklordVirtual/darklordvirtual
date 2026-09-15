@@ -37,6 +37,12 @@ That leads to a research program spanning three layers:
 
 The common problem is **action-time authority**: who authorized an action, what exactly was authorized, whether the protected effect can bypass the governed path, whether the authorization remained valid at dispatch, and whether the external effect can be verified afterwards.
 
+## Open standards & AI security
+
+I contribute public technical review and executable conformance cases around the [CoSAI / OASIS WS4](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems) work on secure agentic systems.
+
+Work under [`@darklordVirtual`](https://github.com/darklordVirtual) helped surface the evidence boundary in [RFC #149](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149) and is explicitly referenced in the resulting standalone [evidence-sufficiency RFC #189](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189). The contribution includes an executable checker, regression artifacts and indistinguishable-history cases supporting `NOT_ESTABLISHED` verifier semantics.
+
 ## Current research
 
 ### [Agent Authority Conformance](https://github.com/darklordVirtual/agent-authority-conformance)
