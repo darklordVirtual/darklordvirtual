@@ -1,53 +1,48 @@
 # Stian Skogbrott
 
-**AI execution controls · Python systems · network automation**
+**Agent execution security · Python systems · Operational infrastructure**
 
-I build systems that control what AI agents are allowed to do and make those decisions inspectable.
+I build and research systems that make AI-agent actions controllable, auditable and inspectable. My focus is the boundary between a model proposing an action and an operational system being authorized to execute it.
 
-I am CEO of **Luftfiber AS**, working with telecom and operational infrastructure in Norway. That experience shapes my software work: keeping credentials under control, containing failures, handling stale state and verifying what actually changed.
+**Core principle: reasoning authority is not execution authority.** Approval, execution authority and evidence of an external effect are separate properties.
 
-My core architectural principle is **reasoning authority ≠ execution authority**. A model can propose an action; approval and execution depend on authority established outside its reasoning loop.
+I lead **Luftfiber AS**, working with telecommunications and operational infrastructure in Norway. Production operations inform my approach to software: least privilege, explicit trust boundaries, durable state, failure recovery and verification of what actually changed.
 
-## Open standards & AI security
+## Research and technical contributions
 
-I contribute technical review and executable conformance cases to discussions in [CoSAI / OASIS WS4](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems).
+I contribute technical reviews, reproducible tests and bounded conformance cases to public discussions on agent security, MCP/tool authorization and evidence sufficiency, including [CoSAI / OASIS WS4](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189) and [agent governance interoperability](https://github.com/aeoess/agent-governance-vocabulary/issues/177).
 
-The [evidence-sufficiency RFC #189](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189) explicitly references my checker, regression artifacts and cases where identical observations can correspond to different underlying histories. Those cases show why missing evidence cannot automatically establish either conformance or a violation.
-
-My contribution focuses on what a verifier can legitimately conclude, including `NOT_ESTABLISHED`, and on keeping test expectations separate from evidence inputs. This is participation in an ongoing standards discussion; it does not imply adoption or endorsement of my projects.
+My work emphasizes what evidence can actually establish. A missing observation is not automatically proof of a violation; a passing test is not proof of complete runtime enforcement. Participation in these discussions does not imply standards endorsement, certification or adoption of my projects.
 
 ## Selected projects
 
-| Project | Purpose |
+| Project | What it addresses |
 |---|---|
-| **[REMORA Research](https://github.com/darklordVirtual/REMORA-research)** | Research into policy-gated agent execution, authorization binding and evidence of external effects. Includes reproducible experiments, a claim register and published negative results. |
-| **[Agent Authority Conformance](https://github.com/darklordVirtual/agent-authority-conformance)** | An independent evidence model for seven authority and execution properties. Draft v0.2 adds explicit inconclusive verdicts, stricter evidence requirements and a bounded reference checker. |
-| **[Assured Agent Execution](https://github.com/darklordVirtual/assured-agent-execution)** | Product-oriented control-plane work: separate approval and execution roles, exact-payload binding, selected effect verification and an auditable lifecycle. |
-| **[vericlaim](https://github.com/darklordVirtual/vericlaim)** | CI checks that bind documented claims and benchmark numbers to their supporting artifacts, detecting drift when the evidence changes. |
-| **[pilotfish](https://github.com/darklordVirtual/pilotfish)** | Early research into network link selection governed by policy, cost constraints and evidence freshness. Includes a decision core and simulator; router adapters remain future work. |
-
-REMORA is research/shadow-mode software. Each project documents its own scope and limitations; the portfolio makes no claim of production certification or universal agent safety.
+| **[REMORA Research](https://github.com/darklordVirtual/REMORA-research)** | Policy-gated agent execution, exact-call and semantic authority, execution evidence, bounded evaluations and published negative results. |
+| **[Agent Authority Conformance Profiles (AACP)](https://github.com/darklordVirtual/agent-authority-conformance)** | Vendor-neutral, draft conformance profiles for seven distinct authority and execution properties. Bounded Claim Reproduction (BCR), explicit inconclusive outcomes and no aggregate security score. |
+| **[Assured Agent Execution](https://github.com/darklordVirtual/assured-agent-execution)** | Reference control plane for exact-payload approval, separated execution roles, auditable lifecycle and selected system-of-record effect checks. |
+| **[vericlaim](https://github.com/darklordVirtual/vericlaim)** | Evidence-linked CI checks that detect drift between documented claims, benchmarks and supporting artifacts. |
+| **[pilotfish](https://github.com/darklordVirtual/pilotfish)** | Experimental policy-governed network link selection; operational router integration remains future work. |
 
 ## Inspect the evidence
 
-Three useful starting points:
+- **[Research claims](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/assurance/claim_register_v1.yaml)**: machine-readable claim status, evidence level, sample sizes and caveats.
+- **[Capability maturity](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/assurance/capability_register_v1.yaml)**: what is implemented, wired, persisted or still unestablished.
+- **[Execution-path quickstart](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/deployment/execution-quickstart.md)**: the governed reference path and its credential-topology limits.
+- **[Negative results](https://github.com/darklordVirtual/REMORA-research/blob/master/NEGATIVE_RESULTS.md)**: failed hypotheses, safety/utility trade-offs and open research boundaries.
+- **[Federation and self-service evidence](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/interop/FEDERATION.md)**: pinned interoperability artifacts, reproduction levels and claim ceilings.
+- **[Research paper](https://github.com/darklordVirtual/REMORA-research/blob/master/paper/remora_paper.md)**: current manuscript and its evaluation limitations.
 
-- **[Claims and reproduction evidence](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/02-evidence-and-claims.md)** — inspect the artifacts and caveats behind individual claims, with the [machine-readable register](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/assurance/claim_register_v1.yaml) as a companion.
-- **[Negative results](https://github.com/darklordVirtual/REMORA-research/blob/master/NEGATIVE_RESULTS.md)** — failed hypotheses, withdrawn claims and known limitations remain part of the record.
-- **[Public technical discussion](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189)** — follow the reasoning, objections and unresolved questions around evidence sufficiency.
-
-For a longer read, see the [REMORA paper (PDF)](https://github.com/darklordVirtual/REMORA-research/blob/master/paper/remora_paper.pdf). The [v0.11.0 release](https://github.com/darklordVirtual/REMORA-research/releases/tag/v0.11.0) provides downloadable artifacts and checksums. AAE documents its separate [pinned core and verification procedure](https://github.com/darklordVirtual/assured-agent-execution/blob/main/docs/pinned-core.md).
+REMORA remains research/shadow-mode software. Bounded external reproductions of specific interoperability contracts do not establish production enforcement, complete runtime coverage, independent safety certification or universal agent safety.
 
 ## How I work
 
-I start with a bounded property, identify the evidence it needs and build a test that can expose a violation. Claims stay tied to revisions and explicit assumptions. When a result fails to support the claim, I narrow the claim or change the implementation.
+I define a bounded property, identify the evidence needed to establish it, and build tests that can falsify it. Claims stay tied to specific revisions and assumptions. When evidence falls short, I narrow the claim rather than stretching the conclusion.
 
-My work spans Python, distributed systems, policy-as-code, identity and access controls, MCP/tool integration and network automation.
+My engineering work spans Python, distributed systems, identity and access controls, policy-as-code, MCP/tool integration and network automation.
 
-## Work with me
+## Collaboration
 
-Through Luftfiber, I am interested in engineering work on governed AI integrations, Python automation and reliable operational infrastructure. I also welcome independent replication, adversarial review and collaboration on executable conformance cases.
-
-A useful starting point is a concrete workflow: which actions it needs, who can authorize them and how their effects can be checked.
+I welcome concrete engineering collaboration, independent reproduction and adversarial review of agent execution controls and evidence semantics. A useful starting point is a specific workflow: which action is proposed, who can authorize it, which credential path can execute it and how its effect can be verified.
 
 **Contact:** [support@luftfiber.no](mailto:support@luftfiber.no)
