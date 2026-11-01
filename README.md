@@ -10,29 +10,46 @@ I design and build software that connects AI reasoning to **controlled, observab
 
 ## Selected engineering work
 
-| Project | What I built / investigate | Inspect it |
-| --- | --- | --- |
-| **[REMORA Research](https://github.com/darklordVirtual/REMORA-research)** | Research implementation for policy-gated tool execution: exact-call authorization, bounded review, dispatch separation, effect evidence and negative-result reporting. **Research / controlled-pilot scope**, not a certified production security product. | [Guided scenarios](https://github.com/darklordVirtual/REMORA-research#try-it-in-two-minutes) · [Claim register](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/assurance/claim_register_v1.yaml) |
-| **[autonomous-ot-control](https://github.com/darklordVirtual/autonomous-ot-control)** | Executable **simulation-only** digital caretaker for HVAC, lighting and other building controls. Signed work orders, separated credentials, policy decisions, synthetic actuators and independent read-back connect authorization to observable effects. **No physical OT write path.** | [Architecture / run guide](https://github.com/darklordVirtual/autonomous-ot-control#how-it-works) · [Federated results](https://github.com/darklordVirtual/autonomous-ot-control/blob/main/docs/federation/RESULTS.md) |
-| **[EOS / Proptech.Energy](https://github.com/darklordVirtual/EOS)** | Building-energy software combining meter ingestion, multi-tenant data, dashboards, anomaly analysis and AI-assisted operational insights. Draws on my hands-on telecom and building-systems experience. | [Platform overview](https://github.com/darklordVirtual/EOS#overview) · [Architecture](https://github.com/darklordVirtual/EOS/blob/main/deployments/hel1/openclaw/workspace/eos-arkitektur-2026-03-28.md) |
-| **[Agent Authority Conformance Profiles (AACP)](https://github.com/darklordVirtual/agent-authority-conformance)** | Independent **draft** evidence model for assessing distinct agent-authorization properties without turning unrelated PASS/FAIL results into an aggregate security score. Separate from the LF Decentralized Trust lab of a similar name. | [Seven properties and status semantics](https://github.com/darklordVirtual/agent-authority-conformance#the-seven-properties) |
-| **[Assured Agent Execution](https://github.com/darklordVirtual/assured-agent-execution)** | Reference implementation connecting the REMORA research kernel to approval, execution and selected system-of-record read-back patterns. | [Architecture and example flow](https://github.com/darklordVirtual/assured-agent-execution#architecture) |
-| **[vericlaim](https://github.com/darklordVirtual/vericlaim)** | CI-oriented checks for drift between technical claims and the supporting artifacts used to justify them. | [Repository and implementation](https://github.com/darklordVirtual/vericlaim) |
+### 1. [REMORA Research](https://github.com/darklordVirtual/REMORA-research) — governed AI execution
 
-My applied-AI experiments also include **DressMeUp/StyleDNA**, a virtual fashion try-on and AI-styling prototype. That work is not represented here as a reproducible public deployment.
+Policy-gated tool execution with exact-call authorization, bounded review, separated dispatch, effect evidence and transparent negative-result reporting.
+
+**Inspect:** [run five guided scenarios](https://github.com/darklordVirtual/REMORA-research#try-it-in-two-minutes) · [machine-readable claim register](https://github.com/darklordVirtual/REMORA-research/blob/master/docs/assurance/claim_register_v1.yaml)
+
+*Scope: research software for bounded, controlled pilot evaluation — not a certified production security product.*
+
+### 2. [autonomous-ot-control](https://github.com/darklordVirtual/autonomous-ot-control) — a governed digital caretaker
+
+A runnable **simulation-only** testbed for HVAC, lighting and other building controls. It combines signed work orders, separate credentials, policy decisions, simulated actuators and independent read-back. The tests demonstrate where action permission and observed effect must be checked separately.
+
+**Inspect:** [architecture and runnable setup](https://github.com/darklordVirtual/autonomous-ot-control#how-it-works) · [federated test results](https://github.com/darklordVirtual/autonomous-ot-control/blob/main/docs/federation/RESULTS.md)
+
+*Scope: simulated plant and bounded test runs. No physical OT/BMS write path.*
+
+### 3. [EOS / Proptech.Energy](https://github.com/darklordVirtual/EOS) — data and AI for building operations
+
+Building-energy software with meter ingestion, multi-tenant data, dashboards, anomaly analysis and AI-assisted operational insights, informed by hands-on infrastructure and building-systems work.
+
+**Inspect:** [platform overview](https://github.com/darklordVirtual/EOS#overview) · [architecture and operating model](https://github.com/darklordVirtual/EOS/blob/main/deployments/hel1/openclaw/workspace/eos-arkitektur-2026-03-28.md)
+
+### Other open engineering work
+
+- **[Agent Authority Conformance Profiles (AACP)](https://github.com/darklordVirtual/agent-authority-conformance)** — independent *draft* evidence model for seven distinct agent-authorization properties, without aggregate security scores. This is **not** the LF Decentralized Trust lab of a similar name.
+- **[Assured Agent Execution](https://github.com/darklordVirtual/assured-agent-execution)** — reference control-plane patterns joining REMORA to approval, execution and selected system-of-record effect checks.
+- **[vericlaim](https://github.com/darklordVirtual/vericlaim)** — CI-oriented checks for drift between technical claims and supporting artifacts.
+
+My applied-AI experiments also include **DressMeUp/StyleDNA**, a virtual fashion try-on and AI-styling prototype. I do not present this as a reproducible public deployment.
 
 ## Public RFC contributions and technical reviews
 
-I participate in public technical work around CoSAI / OASIS Workstream 4 (WS4), especially **authorization at the moment of action**, **containment**, **observer independence** and **the limits of security evidence**. These are **traceable review and implementation contributions**; I do not claim to be the primary author of the RFCs, to speak for CoSAI, or to hold standards approval or certification.
+I contribute technical reviews, testable boundary statements and implementation feedback to public discussions in **CoSAI / OASIS Workstream 4 (WS4)**. Here are concrete examples, each linked to the actual contribution rather than a general standards logo:
 
-| Public discussion | My specific contribution | Evidence |
-| --- | --- | --- |
-| **[WS4 Agent Manifest RFC discussion #149](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149)** | Proposed the non-transitive boundary between a valid declaration, authorized exact call, non-bypassable execution path and verified external effect; outlined isolating negative tests. The proposal was explicitly taken up in the discussion. | [My technical comment](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5443926273) · [Response](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5595582544) |
-| **[WS4 Evidence Sufficiency RFC discussion #189](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189)** | Refined when a verifier may return `not_established`, separated checker inputs from authored test expectations, and corrected provenance boundaries for example vectors. | [My review](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189#issuecomment-5630431104) · [REMORA regression artifact](https://github.com/darklordVirtual/REMORA-research/commit/f10ca2a493755f64df9225a8ccb5636aa344a43a) |
-| **[WS4 Containment follow-on #172](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/172)** | Contributed to the documented containment/evidence discussions and received contributor attribution in the draft. | [Merged contributor-credit update](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/248) · [My credit preference](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/172#issuecomment-6500254075) |
-| **[WS4 Observer independence review, PR #240](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/240)** | Checked proposed observer criteria against REMORA and separated *key separation*, *custody independence*, *observer independence* and *observation coverage*. The distinction was discussed and carried forward in later text. | [My review](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/240#issuecomment-6019873973) · [Follow-on PR #270](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/270) |
+- **[Agent Manifest RFC discussion #149](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149)** — I proposed the **non-transitive boundary** between declared deployment state, authorized exact calls, non-bypassable execution and verified effects, with specific negative tests. [Read my proposal](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5443926273) and [the author's response](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/149#issuecomment-5595582544).
+- **[Evidence Sufficiency RFC discussion #189](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189)** — I reviewed the strict meaning of `not_established`, proposed separating checker input from authored test expectations and corrected vector provenance boundaries. [Read my review](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/189#issuecomment-5630431104) and [inspect a related REMORA regression artifact](https://github.com/darklordVirtual/REMORA-research/commit/f10ca2a493755f64df9225a8ccb5636aa344a43a).
+- **[Containment follow-on #172](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/172)** — contribution to the documented containment/evidence work, with explicit contributor attribution in the draft. [Merged attribution update](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/248) and [credit preference](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/issues/172#issuecomment-6500254075).
+- **[Observer independence, PR #240](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/240)** — I tested a proposed observer criterion against REMORA and distinguished **key separation**, **custody independence**, **observer independence** and **observation coverage**. [Read my review](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/240#issuecomment-6019873973) and [the later merged follow-on](https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/270).
 
-These links demonstrate **participation and review impact**, not authorship of entire specifications or organizational endorsement.
+These are **review and engineering contributions**; they are not claims of primary RFC authorship, CoSAI representation, standards adoption, certification or endorsement of REMORA.
 
 ## Evidence and claim boundaries
 
