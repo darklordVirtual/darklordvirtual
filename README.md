@@ -26,7 +26,15 @@ A runnable **simulation-only** testbed for HVAC, lighting and other building con
 
 *Scope: simulated plant and bounded test runs. No physical OT/BMS write path.*
 
-### 3. [EOS / Proptech.Energy](https://github.com/darklordVirtual/EOS): Data and AI for building operations
+### 3. DCSIM: Data center OT simulator for governance benchmarking
+
+A **simulation-only** model of a data center's operational technology: power, cooling, fuel, life safety, security and the control systems around them, partitioned into **IEC 62443 zones and conduits**. It exists to answer one question with evidence: what does a governance gate change when an AI operations agent proposes actions in a facility where mistakes are expensive?
+
+Each scenario, such as a chiller trip during a heat wave, incremental setpoint drift or energy optimization, runs from the same seed with and without a gate. Every proposal gets a decision record, every blocked proposal gets a counterfactual, and each run produces an evidence bundle that can be verified afterwards. REMORA is the first gate under test, pinned to an exact commit and compared against simpler baselines such as a static allowlist.
+
+*Scope: private repository in active development, so there is no public link yet. DCSIM never connects to real equipment. The REMORA binding currently runs decision-only: it decides, it does not yet govern execution. IEC 61850 and protocol-level servers are not implemented yet. Outputs so far are development simulation runs, not benchmark results.*
+
+### 4. [EOS / Proptech.Energy](https://github.com/darklordVirtual/EOS): Data and AI for building operations
 
 Building-energy software with meter ingestion, multi-tenant data, dashboards, anomaly analysis and AI-assisted operational insights, informed by hands-on infrastructure and building-systems work.
 
